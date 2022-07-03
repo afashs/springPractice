@@ -9,13 +9,16 @@ import com.example.core.member.MemberServiceImpl;
 import com.example.core.member.MemoryMemberRepository;
 import com.example.core.order.OrderService;
 import com.example.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
 
 public class AppConfig {
 
+    @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
@@ -23,6 +26,7 @@ public class AppConfig {
     /**
      * @return 멤버정책
      */
+    @Bean
     private MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
@@ -30,6 +34,7 @@ public class AppConfig {
     /**
      * @return 할인정책
      */
+    @Bean
     private DiscountPolicy discountPolicy() {
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
