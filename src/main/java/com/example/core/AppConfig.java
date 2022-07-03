@@ -1,7 +1,6 @@
 package com.example.core;
 
 import com.example.core.discount.DiscountPolicy;
-import com.example.core.discount.FixDiscountPolicy;
 import com.example.core.discount.RateDiscountPolicy;
 import com.example.core.member.MemberRepository;
 import com.example.core.member.MemberService;
@@ -17,11 +16,13 @@ public class AppConfig {
 
     @Bean
     public MemberService memberService() {
+        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
@@ -30,6 +31,7 @@ public class AppConfig {
      */
     @Bean
     MemberRepository memberRepository() {
+        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
@@ -38,7 +40,6 @@ public class AppConfig {
      */
     @Bean
     DiscountPolicy discountPolicy() {
-//        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
     }
 }
